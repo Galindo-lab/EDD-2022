@@ -1,0 +1,113 @@
+
+#+LATEX_CLASS: article 
+#+LATEX_CLASS_OPTIONS: [12pt]
+#+OPTIONS: \n:nil num:nil toc:nil title:nil
+
+# Ajustar el lenguaje de babel ------------------------------------------------
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+#+LANGUAGE: es
+
+# Ajustes de la hoja ----------------------------------------------------------
+#+LATEX_HEADER: \usepackage{graphicx,geometry}
+#+LATEX_HEADER: \geometry{ a4paper, left=1in, right=1in, top=1in, bottom=1in }
+
+# Cambiar la tipografia -------------------------------------------------------
+#+LATEX_HEADER: \renewcommand\familydefault{\sfdefault} 
+
+# Cambiar la tipografia en los titulos ----------------------------------------
+#+LATEX_HEADER: \usepackage{sectsty}
+#+LATEX_HEADER: \sectionfont{\normalfont\huge}
+#+LATEX_HEADER: \subsectionfont{\large}
+
+# majores tablas --------------------------------------------------------------
+#+latex_header: \usepackage{tabularx}
+
+# Mostar codigo ---------------------------------------------------------------
+#+LATEX_HEADER: \usepackage{listings}
+#+LATEX_HEADER: \lstdefinestyle{mystyle}{
+#+LATEX_HEADER:    numbers=left,
+#+LATEX_HEADER:    showspaces=false,
+#+LATEX_HEADER:    frame=leftline, 
+#+LATEX_HEADER:    showspaces=false,
+#+LATEX_HEADER:    showstringspaces=false, 
+#+LATEX_HEADER:    showtabs=false, 
+#+LATEX_HEADER:    numberstyle=\tiny,
+#+LATEX_HEADER: }
+
+#+LATEX_HEADER: \lstset{
+#+LATEX_HEADER:     style=mystyle,
+#+LATEX_HEADER:     literate={á}{{\'a}}1
+#+LATEX_HEADER:      {é}{{\'e}}1
+#+LATEX_HEADER:      {í}{{\'{\i}}}1
+#+LATEX_HEADER:      {ó}{{\'o}}1
+#+LATEX_HEADER:      {ú}{{\'u}}1
+#+LATEX_HEADER:      {Á}{{\'A}}1
+#+LATEX_HEADER:      {É}{{\'E}}1
+#+LATEX_HEADER:      {Í}{{\'I}}1
+#+LATEX_HEADER:      {Ó}{{\'O}}1
+#+LATEX_HEADER:      {Ú}{{\'U}}1
+#+LATEX_HEADER:      {ü}{{\"u}}1
+#+LATEX_HEADER:      {Ü}{{\"U}}1
+#+LATEX_HEADER:      {ñ}{{\~n}}1
+#+LATEX_HEADER:      {Ñ}{{\~N}}1
+#+LATEX_HEADER:      {¿}{{?``}}1
+#+LATEX_HEADER:      {¡}{{!``}}1
+#+LATEX_HEADER: }
+
+# obtener los valores de los matadatos ----------------------------------------
+#+LATEX_HEADER: \makeatletter 
+
+#+LATEX_HEADER: \usepackage{fancyhdr}
+#+LATEX_HEADER: \pagestyle{fancy}
+
+
+#+macro: lstlisting  @@latex:\lstinputlisting{$1}@@
+
+#+BEGIN_EXPORT latex
+
+\newcommand{\docente}{Itzel Barriba Cazares}
+\newcommand{\asignatura}{Estructuras de Datos (341)}
+\newcommand{\semestre}{2022-2}
+
+\newcommand{\miportada}[1]{
+	\begin{titlepage}
+		\vspace*{0.75in}
+		\begin{flushleft}
+			\sffamily
+			\large #1       \\
+			\Huge 
+            \@title         \\
+			\hrulefill
+			\vspace{0.25in} \\
+			\Large \@author \\
+			\vspace*{\fill}
+            \includegraphics[width=\textwidth]{../includes/filler.png} \\
+			\vspace*{\fill}
+			\large
+			\begin{tabular}{|l|l|}
+              \hline
+			  Asignatura & \asignatura \\
+			  Docente    & \docente    \\
+			  Fecha      & \@date      \\
+              \hline
+			\end{tabular}
+		\end{flushleft}
+	\end{titlepage}
+}
+
+#+END_EXPORT
+
+\miportada{ {{{tagline}}} }
+
+#+BEGIN_EXPORT latex
+\fancyhf{}
+\lhead{ \asignatura }
+\rhead{ \semestre }
+\rfoot{Página \thepage}
+
+\setlength\parindent{0pt}   % eliminar el intentado
+% \setlength{\parskip}{0.75em} 
+\setlength{\parskip}{1.2em} 
+\maketitle
+#+END_EXPORT
+

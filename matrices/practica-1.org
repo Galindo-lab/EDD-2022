@@ -1,0 +1,75 @@
+
+
+
+#+TITLE:  Calculadora de Matrices
+#+AUTHOR: Luis Eduardo Galindo Amaya (1274895)
+#+DATE:   2022-08-24 mié
+
+#+MACRO:  tagline Práctica 1
+#+INCLUDE: "../includes/template.org"
+#+OPTIONS: num:1
+
+* Codigo A
+\lipsum[1-1]
+
+* Código B
+{{{lstlisting(matrices.c)}}}
+
+
+\begin{lstlisting}
+/ Escriba un código que solicite 2 números y los reste. Desplegar un 1 si el
+/ resultado fue negativo o un 0 en caso contrario.  
+
+ INPUT                            / Captura el valor de X
+ Store X                          
+ INPUT                            / Captura un valor de Y
+ Store Y                          
+ 
+ load X                           / Carga el valor de X en el acumulador
+ Subt Y                           / Resta el valor de Y a X 
+ 
+                                  / Para ese punto, el valor en AC es 'X-Y'
+ 
+ Skipcond 000                     / si AC es mayor o igual a 0 
+ clear                            / el valor en AC se vuelve 0
+ 
+ Skipcond 400                     / si es diferente a 0
+ Load verdadero                   / el valor en AC se vuelve 1
+ 
+ Output
+ Halt
+ 
+ X, DEC 0
+ Y, DEC 0
+ verdadero, dec 1
+\end{lstlisting}
+
+# 0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF
+\begin{lstlisting}
+/ ESCRIBA UN CÓDIGO QUE SOLICITE 2 NÚMEROS Y LOS RESTE. 
+/ DESPLEGAR UN 1 SI EL RESULTADO FUE NEGATIVO O UN 0 EN CASO 
+/ CONTRARIO.  
+
+INPUT                   / CAPTURA EL VALOR DE X
+STORE X                          
+INPUT                   / CAPTURA UN VALOR DE Y
+STORE Y                          
+
+LOAD X                  / CARGA EL VALOR DE X EN EL ACUMULADOR
+SUBT Y                  / RESTA EL VALOR DE Y A X 
+
+                        / EL VALOR EN AC ES 'X-Y'
+
+SKIPCOND 000            / SI AC ES MAYOR O IGUAL A 0 
+CLEAR                   / EL VALOR EN AC SE VUELVE 0
+
+SKIPCOND 400            / SI ES DIFERENTE A 0
+LOAD VERDADERO          / EL VALOR EN AC SE VUELVE 1
+
+OUTPUT
+HALT
+
+X, DEC 0
+Y, DEC 0
+VERDADERO, DEC 1
+\end{lstlisting}

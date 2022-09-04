@@ -1,0 +1,188 @@
+% Created 2022-08-24 mié 13:55
+% Intended LaTeX compiler: pdflatex
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish]{babel}
+\usepackage{graphicx,geometry}
+\geometry{ a4paper, left=1in, right=1in, top=1in, bottom=1in }
+\renewcommand\familydefault{\sfdefault}
+\usepackage{sectsty}
+\sectionfont{\normalfont\large }
+\usepackage{tabularx}
+\usepackage{listings}
+\lstdefinestyle{mystyle}{
+numbers=left,
+showspaces=false,
+frame=leftline,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+numberstyle=\tiny,
+}
+\lstset{
+style=mystyle,
+literate={á}{{\'a}}1
+{é}{{\'e}}1
+{í}{{\'{\i}}}1
+{ó}{{\'o}}1
+{ú}{{\'u}}1
+{Á}{{\'A}}1
+{É}{{\'E}}1
+{Í}{{\'I}}1
+{Ó}{{\'O}}1
+{Ú}{{\'U}}1
+{ü}{{\"u}}1
+{Ü}{{\"U}}1
+{ñ}{{\~n}}1
+{Ñ}{{\~N}}1
+{¿}{{?``}}1
+{¡}{{!``}}1
+}
+\makeatletter
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{mdframed}
+\BeforeBeginEnvironment{minted}{\begin{mdframed}}
+\AfterEndEnvironment{minted}{\end{mdframed}}
+\setcounter{secnumdepth}{1}
+\author{Luis Eduardo Galindo Amaya (1274895)}
+\date{2022-08-24 mié}
+\title{Calculadora de Matrices}
+\hypersetup{
+ pdfauthor={Luis Eduardo Galindo Amaya (1274895)},
+ pdftitle={Calculadora de Matrices},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.1.9)}, 
+ pdflang={Spanish}}
+\begin{document}
+
+
+\newcommand{\docente}{Manuel Castañón-Puga}
+\newcommand{\asignatura}{Herramientas de Desarrollo de Software (40017)}
+\newcommand{\semestre}{2022-2}
+
+\newcommand{\miportada}[1]{
+	\begin{titlepage}
+		\vspace*{0.75in}
+		\begin{flushleft}
+			\sffamily
+			\large #1       \\
+			\Huge 
+            \@title         \\
+			\hrulefill
+			\vspace{0.25in} \\
+			\Large \@author \\
+			\vspace*{\fill}
+            \includegraphics[width=\textwidth]{../includes/filler.png} \\
+			\vspace*{\fill}
+			\large
+			\begin{tabular}{|l|l|}
+              \hline
+			  Asignatura & \asignatura \\
+			  Docente    & \docente    \\
+			  Fecha      & \@date      \\
+              \hline
+			\end{tabular}
+		\end{flushleft}
+	\end{titlepage}
+}
+
+\miportada{ Práctica 1 }
+
+\fancyhf{}
+\lhead{ \asignatura }
+\rhead{ \semestre }
+\rfoot{Página \thepage}
+
+\setlength\parindent{0pt}   % eliminar el intentado
+\setlength{\parskip}{1.2em}
+% \maketitle
+
+\thispagestyle{empty}
+\begin{center}
+	{\large
+		UNIVERSIDAD AUTÓNOMA DE BAJA CALIFORNIA \\
+		Facultad de Ciencias Químicas e Ingeniería }
+	\vspace{0.25in} \\
+	Programa de Ingeniero en Software y Tecnologías Emergentes
+\end{center}
+
+\section{Codigo A}
+\label{sec:org8543722}
+\lipsum[1-1]
+
+\section{Código B}
+\label{sec:orgfa1a854}
+\lstinputlisting{matrices.c}
+
+
+\begin{lstlisting}
+/ Escriba un código que solicite 2 números y los reste. Desplegar un 1 si el
+/ resultado fue negativo o un 0 en caso contrario.  
+
+ INPUT                            / Captura el valor de X
+ Store X                          
+ INPUT                            / Captura un valor de Y
+ Store Y                          
+ 
+ load X                           / Carga el valor de X en el acumulador
+ Subt Y                           / Resta el valor de Y a X 
+ 
+                                  / Para ese punto, el valor en AC es 'X-Y'
+ 
+ Skipcond 000                     / si AC es mayor o igual a 0 
+ clear                            / el valor en AC se vuelve 0
+ 
+ Skipcond 400                     / si es diferente a 0
+ Load verdadero                   / el valor en AC se vuelve 1
+ 
+ Output
+ Halt
+ 
+ X, DEC 0
+ Y, DEC 0
+ verdadero, dec 1
+\end{lstlisting}
+
+\begin{lstlisting}
+/ ESCRIBA UN CÓDIGO QUE SOLICITE 2 NÚMEROS Y LOS RESTE. 
+/ DESPLEGAR UN 1 SI EL RESULTADO FUE NEGATIVO O UN 0 EN CASO 
+/ CONTRARIO.  
+
+INPUT                   / CAPTURA EL VALOR DE X
+STORE X                          
+INPUT                   / CAPTURA UN VALOR DE Y
+STORE Y                          
+
+LOAD X                  / CARGA EL VALOR DE X EN EL ACUMULADOR
+SUBT Y                  / RESTA EL VALOR DE Y A X 
+
+                        / EL VALOR EN AC ES 'X-Y'
+
+SKIPCOND 000            / SI AC ES MAYOR O IGUAL A 0 
+CLEAR                   / EL VALOR EN AC SE VUELVE 0
+
+SKIPCOND 400            / SI ES DIFERENTE A 0
+LOAD VERDADERO          / EL VALOR EN AC SE VUELVE 1
+
+OUTPUT
+HALT
+
+X, DEC 0
+Y, DEC 0
+VERDADERO, DEC 1
+\end{lstlisting}
+\end{document}

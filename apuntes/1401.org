@@ -1,0 +1,14 @@
+#+TITLE:  Notas De Estructuras De Datos
+#+AUTHOR: Luis Eduardo Galindo Amaya (1274895)
+#+DATE:   2022-08-24 mié
+
+#+MACRO:  tagline    Notas
+#+include: "../includes/template.org"
+
+* Bubble-sort
+** Bubble-sort array fijo
+{{{lstlisting(code/bubble.c)}}}
+
+** Bubble-sort con pase por parametros
+{{{lstlisting(code/bubble-test.c)}}}
+

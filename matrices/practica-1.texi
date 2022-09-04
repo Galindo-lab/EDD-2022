@@ -1,0 +1,31 @@
+\input texinfo    @c -*- texinfo -*-
+@c %**start of header
+@setfilename practica-1.info
+@settitle Calculadora de Matrices
+@documentencoding UTF-8
+@documentlanguage es
+@c %**end of header
+
+@finalout
+@titlepage
+@author Luis Eduardo Galindo Amaya @*
+1274895
+@end titlepage
+
+@ifnottex
+@node Top
+@top Calculadora de Matrices
+@end ifnottex
+
+@menu
+* Codigo A::
+* Código B::
+@end menu
+
+@node Codigo A
+@chapter Codigo A
+
+@node Código B
+@chapter Código B
+
+@bye
