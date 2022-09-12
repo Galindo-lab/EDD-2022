@@ -68,8 +68,8 @@
 
 #+BEGIN_EXPORT latex
 
-\newcommand{\docente}{Manuel Castañón-Puga}
-\newcommand{\asignatura}{Herramientas de Desarrollo de Software (40017)}
+\newcommand{\docente}{Itzel Barriba Cazares}
+\newcommand{\asignatura}{Estructuras de Datos (341)}
 \newcommand{\semestre}{2022-2}
 
 \newcommand{\miportada}[1]{

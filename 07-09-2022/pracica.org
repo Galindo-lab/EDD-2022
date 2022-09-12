@@ -1,0 +1,56 @@
+
+#+TITLE:  Listas Ligadas Sencillas
+#+AUTHOR: Luis Eduardo Galindo Amaya (1274895)
+#+DATE:   2022-09-11
+
+#+MACRO:  tagline    Practica 
+#+include: "../includes/template.org"
+
+* Prodecimieto
+Se analizaron los documentos enviados por la profesora y se usaron como base para crear una libreria nueva para manejar lista ssencillas. La lista original simplemente ordenaba los elementos de menor a menor, en la nueva lista los terminos se pueden agregar por pocision:
+
+- 0. Al inicio
+- -1. Al final
+- y cualquier otra pocision definida por el usuario.
+
+* Analisis del resultado
+Los resultados son los esperados, se pudo siplificar los metodos y ahora son mas legibles por si es necesario hacer modificaciones en el futuro
+
+* Capturas de Pantalla
+** Inserción de datos 
+[[file:img/insertar.png]]
+
+** Eliminación de datos
+[[file:img/eliminar.png]]
+
+* Conclusiones
+Las listas a pesar de tener un comportamiento bien definido pueden modificarse para cumplir con roles muy específicos para la aplicación que se desea crear. 
+
+* Código
+{{{lstlisting(src/lista-sencilla.c)}}}
+
+
+# // Informacion -------------------------------------------------
+# /*
+
+# Practica 2: Lista ligadas
+#  1) Insetar un elemento al final
+#  2) al inicio...
+#  ...
+#  7) por ultimo...
+
+
+# Reporte
+#                   /
+#  - portada        | - Código                 /
+#  - procedimiento <                           | Ejecucion de
+#                   | - Capturas de pantalla  <  varios datos de
+#                   |                          | entrada de
+#                   | - Analisis de resultado  | todas las
+#                   |                          | funciones
+#                   | - Conslusiones           \
+#                   |
+#                   | -  Referencias
+#                   \
+
+# */

@@ -1,0 +1,41 @@
+#+TITLE:  notas lun 05 sep 2022 15:12:21
+#+AUTHOR: Luis Eduardo Galindo Amaya (1274895)
+#+DATE:   [2022-09-05 lun]
+
+#+MACRO:  tagline    
+#+include: "../includes/template.org"
+
+* Estructuras de datos
+** listas 
+son colecciones de elementos de datos "alineados " en una fila. puede insertar y eliminar elementos en cualquier lugar de la lista ligada.
+
+** pilas 
+** colas
+** arboles binarios 
+** grafos 
+
+* Estructuras autoreferenciadas 
+- una estructura autoreferenciada contiene un miebro apuntador, el cual apunta hacia una estructura del mismo tipo. 
+
+- por ejemplo la definicion
+#+BEGIN_SRC c
+  struct nodo {
+    int data;
+    struct nodo *siguiente;
+  }
+#+END_SRC
+
+- las estructuras autoreferenciadas pueden ligarse entre si para formar estructuas de datos útiles, como listas, colas, pilas y árboles.
+
+- El siguiente diagrama ilustra
+
+
+* asignacion dinamica de memeoria 
+crear y mantener estructuras dinamicas requiere de las asinacion de memeoria dinamica. 
+
+#+BEGIN_SRC c
+malloc, realoc
+#+END_SRC
+
+* 
+
