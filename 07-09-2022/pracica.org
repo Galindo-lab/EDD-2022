@@ -6,6 +6,18 @@
 #+MACRO:  tagline    Practica 
 #+include: "../includes/template.org"
 
+
+
+* Información De La Actividad
+#+BEGIN_mdframed
+- Nombre de la actividad :: {{{title}}
+- Fecha :: {{{date}}}
+- Lugar :: Edificio 6E, Salón 204.
+- Carácter de la actividad :: Individual.
+- Participante(es) :: {{{author}}}.
+- [[https://github.com/Galindo-lab/EDD-2022/blob/main/07-09-2022/src/lista-sencilla.c][Repositorio de Github]]
+#+END_mdframed
+
 * Prodecimieto
 Se analizaron los documentos enviados por la profesora y se usaron como base para crear una libreria nueva para manejar lista ssencillas. La lista original simplemente ordenaba los elementos de menor a menor, en la nueva lista los terminos se pueden agregar por pocision:
 
@@ -14,7 +26,7 @@ Se analizaron los documentos enviados por la profesora y se usaron como base par
 - y cualquier otra pocision definida por el usuario.
 
 * Analisis del resultado
-Los resultados son los esperados, se pudo siplificar los metodos y ahora son mas legibles por si es necesario hacer modificaciones en el futuro
+Los resultados son los esperados, se pudo siplificar los metodos y ahora son mas legibles por si es necesario hacer modificaciones en el futuro.
 
 * Capturas de Pantalla
 ** Inserción de datos 

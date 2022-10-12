@@ -1,0 +1,6 @@
+ #+TITLE:  
+ #+AUTHOR: Luis Eduardo Galindo Amaya (1274895)
+ #+DATE:   
+
+ #+MACRO:  tagline    
+ #+include: "../includes/template.org"

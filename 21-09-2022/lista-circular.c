@@ -1,4 +1,4 @@
-
+#include <stdio.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,11 +21,14 @@ char capturar_caracter();
 
 void insertar(ptrNodoLista *ptrS, int posicion, int valor);
 void eliminar(ptrNodoLista *ptrS, int posicion);
+int size(ptrNodoLista ptrS);
 void imprimeLista(ptrNodoLista ptrActual);
 void instrucciones(void);
 void liberarMemoria(ptrNodoLista *ptrS);
 
 // Main --------------------------------------------------------
+
+
 
 int main() {
   ptrNodoLista lista = NULL;
@@ -65,12 +68,28 @@ int main() {
     }
   }
 
-  liberarMemoria(&lista);
+  /* liberarMemoria(&lista); */
 
   return 0;
 }
 
 // Funciones ---------------------------------------------------
+
+
+int size(ptrNodoLista ptrS) {
+  ptrNodoLista current = ptrS;
+  int cont = 0;
+  
+  if(current == NULL)
+    return 0;
+
+  do {
+    current = current->ptrSiguiente;
+    cont++;
+  } while( current != ptrS );
+
+  return cont;
+}
 
 /**
  * Verificar si esta vacia la lista
@@ -125,16 +144,17 @@ void instrucciones() {
  * @param ptrActual puntero a la lista
  */
 void imprimeLista(ptrNodoLista ptrActual) {
-
+  ptrNodoLista current = ptrActual;
+  
   if (estaVacia(ptrActual)) {
     printf("La lista esta vacia.\n");
     return;
   }
 
-  for (int i = 0; ptrActual != NULL; i++) {
-    printf("[%d: %d]->", i, ptrActual->dato);
-    ptrActual = ptrActual->ptrSiguiente;
-  }
+  do {
+    printf("%d = ", current->dato);
+    current = current->ptrSiguiente;
+  } while(current != ptrActual);
 
   printf("NULL\n");
 }
@@ -147,8 +167,8 @@ void imprimeLista(ptrNodoLista ptrActual) {
  * @param posicion del elemento a eliminar
  */
 void eliminar(ptrNodoLista *ptrS, int posicion) {
-  ptrNodoLista ptrAnterior;
-  ptrNodoLista ptrActual;
+  ptrNodoLista temp = *ptrS;
+  ptrNodoLista current = *ptrS;
 
   /* determinar si esta vacia */
   if (estaVacia(*ptrS)) {
@@ -156,47 +176,47 @@ void eliminar(ptrNodoLista *ptrS, int posicion) {
     return;
   }
 
-  ptrActual = *ptrS;
-  ptrAnterior = NULL;
-
-  /* eliminar el primer elemento o el unico elemento en la 
-     lista si solo tiene un termino */
-  if (posicion == 0 || ptrActual->ptrSiguiente == NULL) {
-    *ptrS = ptrActual->ptrSiguiente;
-    printf("Valor %d eliminado\n", ptrActual->dato);
-    free(ptrActual);
-    return;
-  }
-
   /* eliminar elemento al final */
-  if (posicion == -1) {
-    while (ptrActual->ptrSiguiente != NULL) {
-      ptrAnterior = ptrActual;
-      ptrActual = ptrActual->ptrSiguiente;
+  if (posicion <= -1) {
+    while (current->ptrSiguiente != (*ptrS)) {
+      temp = current;
+      current = current->ptrSiguiente;
     }
 
     /* asigna el como nodo siguiente NULL por que se elimina
        el ultimo */
-    ptrAnterior->ptrSiguiente = NULL;
-    free(ptrActual);
+    temp->ptrSiguiente = current->ptrSiguiente;
+    free(current);
     return;
   }
 
-  /* eliminar elemento por posicion */
-  for (int i = posicion; i > 0; --i) {
-    /* iterar los punteros */
-    ptrAnterior = ptrActual;
-    ptrActual = ptrActual->ptrSiguiente;
-    /* si el siguiente putero no existe  */
-    if (ptrActual == NULL) {
-      printf("Fuera de rango\n");
-      return;
-    }
-  }
 
-  ptrAnterior->ptrSiguiente = ptrActual->ptrSiguiente;
-  printf("Valor %d eliminado\n", ptrActual->dato);
-  free(ptrActual);
+  if (posicion == 0) {
+    while(current->ptrSiguiente != (*ptrS))
+      current = current->ptrSiguiente;
+
+    current->ptrSiguiente = (*ptrS)->ptrSiguiente;
+    *ptrS = (*ptrS)->ptrSiguiente;
+    free(temp);
+    return;
+  }
+  
+
+  /* /\* eliminar elemento por posicion *\/ */
+  /* for (int i = posicion; i > 0; --i) { */
+  /*   /\* iterar los punteros *\/ */
+  /*   ptrAnterior = ptrActual; */
+  /*   ptrActual = ptrActual->ptrSiguiente; */
+  /*   /\* si el siguiente putero no existe  *\/ */
+  /*   if (ptrActual == NULL) { */
+  /*     printf("Fuera de rango\n"); */
+  /*     return; */
+  /*   } */
+  /* } */
+
+  /* ptrAnterior->ptrSiguiente = ptrActual->ptrSiguiente; */
+  /* printf("Valor %d eliminado\n", ptrActual->dato); */
+  /* free(ptrActual); */
 }
 
 /**
@@ -209,11 +229,8 @@ void eliminar(ptrNodoLista *ptrS, int posicion) {
  * @param valor a insertar
  */
 void insertar(ptrNodoLista *ptrS, int posicion, int valor) {
-  ptrNodoLista ptrNuevo;
-  ptrNodoLista ptrAnterior;
-  ptrNodoLista ptrActual;
-
-  ptrNuevo = malloc(sizeof(NodoLista));
+  ptrNodoLista ptrActual = *ptrS;
+  ptrNodoLista ptrNuevo = malloc(sizeof(NodoLista));
 
   /* Verificar que hay memoria para contirnuar */
   if (ptrNuevo == NULL) {
@@ -221,59 +238,56 @@ void insertar(ptrNodoLista *ptrS, int posicion, int valor) {
     exit(EXIT_FAILURE);
   }
 
-  /* Si la memoria se puede reservar entonces podemos
-     usar el nuevo nodo */
   ptrNuevo->dato = valor;
-  /* todavia no sabemos si hay mas nodos antes o despues así */
-  ptrNuevo->ptrSiguiente = NULL;
+  ptrNuevo->ptrSiguiente = ptrNuevo;
 
+  if(estaVacia(*ptrS)){
+    *ptrS = ptrNuevo;
+    return;
+  }
+  
   /* insertar al inicio o si la lista esta vacia insertamos
      termino en el primer nodo y termina */
-  if (posicion == 0 || estaVacia(*ptrS)) {
+  if (posicion == 0) {
+    while( ptrActual->ptrSiguiente != *ptrS ) {
+      ptrActual = ptrActual->ptrSiguiente;
+    }
+    
     ptrNuevo->ptrSiguiente = *ptrS;
+    ptrActual->ptrSiguiente = ptrNuevo;
     *ptrS = ptrNuevo;
     return;
   }
 
-  /* Variables de iteracion */
-  ptrActual = *ptrS;
-  ptrAnterior = NULL;
-
   /* Si la posicion es -1 entonces insertamos al final */
   if (posicion < 0) {
-    /* hay dos formas de resolver este problema :*/
+    while(ptrActual->ptrSiguiente != *ptrS)
+      ptrActual = ptrActual->ptrSiguiente;
 
-    /* La lenta, iterando un numero muy grande con la
-       funcion de insertar en posicion arbitraria, es lenta por
-       que la funcion tiene que hacer varias verificaciones.
-       NOTE: 0x7FFF es el maximo valor entero con signo en C */
+    ptrNuevo->ptrSiguiente = ptrNuevo;
 
-    posicion = 0x7FFF;
+    if(*ptrS == NULL){
+      *ptrS = ptrNuevo;
+      return;
+    }
 
-    /* La rapida, que itera desde el 0 hasta el ultimo termino
-       en general es mas rapida porque no tienes que reasignar
-       cada variable en cada iteracion */
-
-    /* while (ptrActual->ptrSiguiente != NULL) */
-    /*   ptrActual = ptrActual->ptrSiguiente; */
-    /* ptrActual->ptrSiguiente = ptrNuevo; */
-    /* return; */
-
-    /* las dos hacen exactamente lo mismo */
+    ptrNuevo->ptrSiguiente = *ptrS;
+    ptrActual->ptrSiguiente = ptrNuevo;
+    return;
   }
 
-  /* Si el valor es mayor a 0 entonces sustituyes el valor en la
-     posicion espesificada */
-  for (int i = posicion; i > 0; --i) {
-    /* iterar los punteros */
-    ptrAnterior = ptrActual;
-    ptrActual = ptrActual->ptrSiguiente;
-    /* si el siguiente putero no existe  */
-    if (ptrActual == NULL)
-      break;
-  }
-  ptrAnterior->ptrSiguiente = ptrNuevo;
-  ptrNuevo->ptrSiguiente = ptrActual;
+  /* /\* Si el valor es mayor a 0 entonces sustituyes el valor en la */
+  /*    posicion espesificada *\/ */
+  /* for (int i = posicion; i > 0; --i) { */
+  /*   /\* iterar los punteros *\/ */
+  /*   ptrAnterior = ptrActual; */
+  /*   ptrActual = ptrActual->ptrSiguiente; */
+  /*   /\* si el siguiente putero no existe  *\/ */
+  /*   if (ptrActual == NULL) */
+  /*     break; */
+  /* } */
+  /* ptrAnterior->ptrSiguiente = ptrNuevo; */
+  /* ptrNuevo->ptrSiguiente = ptrActual; */
 }
 
 /**
