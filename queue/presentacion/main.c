@@ -1,17 +1,51 @@
 
 #include <stdio.h>
 
-#include "lib/queueA.h"
 #include "lib/arrayQueue.h"
+#include "lib/circularList.h"
+#include "lib/queueA.h"
 
 int main() {
 
-  ArrayQueue a;
+  CircularList a;
+  circularListInit(&a);
 
-  staticQueueInit(&a);
+  circularListEnqueue(&a, 9);
+  circularListEnqueue(&a, 10);
+  circularListEnqueue(&a, 11);
+  circularListEnqueue(&a, 12);
+  circularListEnqueue(&a, 3);
 
-  printf("%d\n", a.data[0]);
-  
+
+  displayCircularList(&a);
+
+  for(int i=0;i < 10; i++){
+    circularListDequeue(&a);
+    displayCircularList(&a);
+  }
+
+
+  /* ArrayQueue a; */
+
+  /* staticQueueInit(&a); */
+
+  /* for(int i=0;i < 21; i++){ */
+  /*   staticEnqueue(&a,i+3);  */
+  /* } */
+
+  /* int foo = staticDequeue(&a); */
+  /* staticDequeue(&a); */
+  /* staticDequeue(&a); */
+  /* staticDequeue(&a); */
+  /* staticDequeue(&a); */
+  /* staticDequeue(&a); */
+
+  /* staticEnqueue(&a,10);  */
+
+  /* displayStaticQueue(&a); */
+
+  /* printf("extraido %d\n",foo); */
+
   /* Queue cola; */
   /* LinkedList* lista= NULL; */
 
@@ -36,7 +70,7 @@ int main() {
   /* orderedEnqueue(&cola, 9); */
   /* orderedEnqueue(&cola, 0); */
   /* orderedEnqueue(&cola, 10); */
-  
+
   /* displayQueue(&cola); */
 
   return 0;

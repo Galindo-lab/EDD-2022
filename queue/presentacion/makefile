@@ -1,2 +1,4 @@
 compile:
-		gcc -W -Wall -pedantic -std=c99 parque_de_diversiones.c
+	gcc -W -Wall -pedantic -std=c99 main.c
+	./a.out
+	rm a.out

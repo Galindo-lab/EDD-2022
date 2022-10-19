@@ -40,12 +40,12 @@ LinkedListNode *linkedListGetSecondLastNode(LinkedList **head) {
   LinkedListNode *next = current->next;
 
   if (linkedListEmpty(*head)) {
-    printf("La lista esta vacia!\n");
+    printf("ERROR: linkedListGetSecondLastNode - La lista esta vacia!\n");
     exit(EXIT_FAILURE);
   }
 
   if (linkedListHasOneItem(&current)) {
-    printf("Solo tiene un elemento\n");
+    printf("ERROR: linkedListGetSecondLastNode - Solo tiene un elemento\n");
     exit(EXIT_FAILURE);
   }
 
@@ -66,7 +66,7 @@ LinkedList *linkedListGetLastNode(LinkedList **head) {
   LinkedList *second_last = NULL;
 
   if (linkedListEmpty(*head)) {
-    printf("Lista vacia\n");
+    printf("ERROR: linkedListGetLastNode - Lista vacia\n");
     exit(EXIT_FAILURE);
   }
 
@@ -85,7 +85,7 @@ LinkedList *linkedListGetLastNode(LinkedList **head) {
  */
 void _llValidPosition(int position) {
   if (position < -1) {
-    printf("La posicion es menor a -1\n");
+    printf("ERROR: _llValidPosition - La posicion es menor a -1\n");
     exit(EXIT_SUCCESS);
   }
 }
@@ -180,7 +180,7 @@ void linkedListRemove(LinkedList **head, int position) {
 
   /* no existe el primer elemento */
   if (linkedListEmpty(*head)) {
-    printf("La lista esta vacia\n");
+    printf("ERROR: linkedListRemove - La lista esta vacia\n");
     return;
   }
 
@@ -208,7 +208,7 @@ void linkedListRemove(LinkedList **head, int position) {
     /* si no existe la posicion se termina el bucle, exepto si es la ultima
        iteracion */
     if (current->next == NULL && !(i + 1 < position)) {
-      printf("Elemento fuera del rango de la lista\n");
+      printf("ERROR: linkedListRemove - Elemento fuera del rango de la lista\n");
       exit(EXIT_FAILURE);
     }
   }
@@ -229,8 +229,8 @@ int linkedListGet(LinkedList **head, int position) {
   _llValidPosition(position);
 
   if (linkedListEmpty(*head)) {
-    printf("La lista esta vacia!\n");
-    exit(EXIT_FAILURE);
+    printf("ERROR: linkedListGet - La linkedList esta vacia!\n");
+    return 0;
   }
 
   /* retorna el valor de la ultima posición */
@@ -316,7 +316,7 @@ void displayLinkedList(LinkedList *head) {
   LinkedListNode *ptrActual = head;
 
   if (linkedListEmpty(head)) {
-    printf("La lista esta vacia.\n");
+    printf("displayLinkedList - La lista esta vacia.\n");
     return;
   }
 

@@ -17,10 +17,14 @@ typedef struct {
  */
 void staticQueueInit(ArrayQueue* queue){
   queue->size = 0;
-  queue->first = 0;
-  queue->last = 0;
   
-  for(int i=0;i < ARRAY_QUEUE_SIZE; i++){<na si la lista esta vacia
+  for(int i=0;i < ARRAY_QUEUE_SIZE; i++){
+    queue->data[i] = 4;
+  }
+}
+
+/**
+ * Retorna si la lista esta vacia
  * @param direccion a ArrayQueue
  */
 short staticQueueEmpty(ArrayQueue *queue) {
@@ -36,7 +40,7 @@ short staticQueueFull(ArrayQueue *queue) {
 }
 
 /**
- * 
+ * añade un elemento a la cola
  * @param  
  * @return 
  */
@@ -46,8 +50,47 @@ void staticEnqueue(ArrayQueue *queue, int value) {
     return;
   }
 
+  queue->data[queue->size] = value;
+  queue->size += 1;
+}
+
+/**
+ * Extrae el primer elemento de la cola
+ * @param  
+ * @return 
+ */
+int staticDequeue(ArrayQueue *queue) {
+  int value = 0;
+  if(staticQueueEmpty(queue)) {
+    printf("ERROR: Cola Vacia\n");
+    return 0;
+  }
+
+  value = queue->data[0];
+
+  /* recorrer los datos una posicion */
+  for(int i=0;i < queue->size-1; i++){
+    queue->data[i] = queue->data[i+1];
+  }
   
+  queue->size -= 1;
+  return value;
+}
+
+/**
+ * Muesra el valor en la cola
+ * @param  
+ * @return 
+ */
+void displayStaticQueue(ArrayQueue *queue) {
+  for(int i=0;i < queue->size; i++){
+    printf("%d: %d\n",i,queue->data[i]);
+  }
 }
 
 
+
+
+
 #endif
+
