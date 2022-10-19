@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct {
+struct _LinkedListNode {
   int data;
-  LinkedList *next;
-}LinkedList;
+  struct _LinkedListNode *next;
+};
 
-/* typedef struct _LinkedListNode LinkedList; */
+typedef struct _LinkedListNode LinkedList;
 typedef LinkedList LinkedListNode;
 
 /**
@@ -250,6 +250,30 @@ int linkedListGet(LinkedList **head, int position) {
   }
 
   return current->data;
+}
+
+void linkedListOrderedInsert(LinkedList **head, LinkedListNode *node) {
+  LinkedListNode *current = *head;
+  int i = 0;
+
+  /* Nodo inicial */
+  if (linkedListEmpty(*head)) {
+    *head = node;
+    return;
+  }
+
+  /* mientras halla un siguiente se continua iterando, hasta que el valor
+     den nodo actual sea mayor que el del nodo que se decea insertar */
+  while (node->data < current->data) {
+    i++;
+    
+    if(current->next == NULL)
+      break;
+
+    current = current->next;
+  }
+
+  linkedListInsert(head, node, i);
 }
 
 /**

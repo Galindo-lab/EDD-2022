@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct {
+struct _LinkedListNode {
   int data;
-  LinkedList *next;
-}LinkedList;
+  struct _LinkedListNode *next;
+};
 
-/* typedef struct _LinkedListNode LinkedList; */
-typedef LinkedList LinkedListNode;
+typedef struct _LinkedListNode LinkedList;
+typedef struct _LinkedListNode LinkedListNode;
 
 /**
  * Restorna si la lista esta vacia

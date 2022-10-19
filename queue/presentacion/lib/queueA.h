@@ -35,6 +35,17 @@ void enqueue(Queue *queue, int value) {
 }
 
 /**
+ * Inserta un valor de manera ordenada, el valor de mayor valor esta
+ * en las primeras posiciones y los de menor valor en las ultimas
+ * @param direcciona a una cola
+ * @param valor a encolar
+ */
+void orderedEnqueue(Queue *queue, int value){
+  linkedListOrderedInsert(&queue->pila, linkedListNodeCreate(value));
+  queue->size += 1;
+}
+
+/**
  * Quitar el primer elemento de la lista
  * @warning si se quiere extraer un valor de una fila vacia se retornara 0 y se
  * mostrara un mensaje de error

@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct {
+struct _LinkedListNode {
   int data;
-  LinkedList *next;
-}LinkedList;
+  struct _LinkedListNode *next;
+};
 
-/* typedef struct _LinkedListNode LinkedList; */
-typedef LinkedList LinkedListNode;
+typedef struct _LinkedListNode LinkedList;
+typedef struct _LinkedListNode LinkedListNode;
 
 /**
  * Restorna si la lista esta vacia
@@ -20,71 +20,12 @@ typedef LinkedList LinkedListNode;
 short linkedListEmpty(LinkedList *head) { return head == NULL; }
 
 /**
- * Restorna si la lista esta vacia
- * @param *head lista de nodos
- * @return verdadero si la lista esta vacia
- */
-short linkedListHasOneItem(LinkedList **head) {
-  LinkedListNode *current = *head;
-  return current->next == NULL;
-}
-
-/**
- * Algunas operaciones requieren modificar el penultimo y el ultimo elemento y
- * para no repetir esa operacion exsite esta funcion
- * @param direccion al primer nodo de la lista
- * @return direccion al penultimo nodo
- */
-LinkedListNode *linkedListGetSecondLastNode(LinkedList **head) {
-  LinkedListNode *current = *head;
-  LinkedListNode *next = current->next;
-
-  if (linkedListEmpty(*head)) {
-    printf("La lista esta vacia!\n");
-    exit(EXIT_FAILURE);
-  }
-
-  if (linkedListHasOneItem(&current)) {
-    printf("Solo tiene un elemento\n");
-    exit(EXIT_FAILURE);
-  }
-
-  while (next->next != NULL) {
-    current = next;
-    next = current->next;
-  }
-
-  return current;
-}
-
-/**
- * obtener el ultimo nodo de la lista
- * @param direccion a la lista
- * @return posiscion en memoeria del ultimo nodo
- */
-LinkedList *linkedListGetLastNode(LinkedList **head) {
-  LinkedList *second_last = NULL;
-
-  if (linkedListEmpty(*head)) {
-    printf("Lista vacia\n");
-    exit(EXIT_FAILURE);
-  }
-
-  if (linkedListHasOneItem(head)) {
-    return *head;
-  }
-
-  second_last = linkedListGetSecondLastNode(head);
-  return second_last->next;
-}
-
-/**
  * cualqiuier valor mayor o igual a -1 es valido, si no es
  * valido termina el programa
- * @param position a verificar
+ * @param position a verificar 
  */
-void _llValidPosition(int position) {
-  if (position < -1) {
+void _llValidPosition(int position){
+  if(position < -1) {
     printf("La posicion es menor a -1\n");
     exit(EXIT_SUCCESS);
   }
@@ -142,7 +83,14 @@ void linkedListInsert(LinkedList **head, LinkedListNode *node, int position) {
 
   /* Insertar al final  */
   if (position == -1) {
-    linkedListGetLastNode(head)->next = new;
+    /* iterar hasta el ultimo nodo */
+    while (current != NULL) {
+      previous = current;
+      current = current->next;
+    }
+
+    previous->next = new;
+    new->next = current;
     return;
   }
 
@@ -185,7 +133,7 @@ void linkedListRemove(LinkedList **head, int position) {
   }
 
   /* elimna la primera posicion o eliminar un elemento unico*/
-  if (position == 0 || linkedListHasOneItem(head)) {
+  if (position == 0 || current->next == NULL) {
     previous = current;
     *head = current->next;
     free(previous);
@@ -194,9 +142,13 @@ void linkedListRemove(LinkedList **head, int position) {
 
   /* elimina la ultima posicion */
   if (position == -1) {
-    current = linkedListGetSecondLastNode(head);
-    free(current->next);
-    current->next = NULL;
+    while (current->next != NULL) {
+      previous = current;
+      current = current->next;
+    }
+
+    previous->next = NULL;
+    free(current);
     return;
   }
 
@@ -235,7 +187,9 @@ int linkedListGet(LinkedList **head, int position) {
 
   /* retorna el valor de la ultima posición */
   if (position == -1) {
-    return linkedListGetLastNode(head)->data;
+    while (current->next != NULL)
+      current = current->next;
+    return current->data;
   }
 
   for (int i = 0; i < position; i++) {
@@ -303,6 +257,7 @@ void displayLinkedList(LinkedList *head) {
 
   printf("NULL\n");
 }
+
 
 void listValuesLinkedList(LinkedList *head) {
   LinkedListNode *ptrActual = head;
