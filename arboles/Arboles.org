@@ -1,0 +1,7 @@
+#+TITLE:  Árboles 
+#+AUTHOR: Luis Eduardo Galindo Amaya (1274895)
+#+DATE:   26-10-2022
+
+#+MACRO:  tagline  Estructuras de datos
+#+INCLUDE: "../includes/template.org"
+#+OPTIONS: ^:nil
