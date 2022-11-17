@@ -1,0 +1,36 @@
+
+#+TITLE:  Árboles
+#+AUTHOR: Luis Eduardo Galindo Amaya (1274895)
+#+DATE:   07-11-2022
+
+#+MACRO:  tagline  Taller
+#+INCLUDE: "../includes/template.org"
+#+OPTIONS: ^:nil
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
